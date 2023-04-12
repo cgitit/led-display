@@ -13,6 +13,12 @@
  <li>Included Demo's from the hzeller/rpi-rgb-led-matrix git, the repo these scripts utilize. (Game of life, Equalizer, Snake like art)</li>
 </ul>
 <p>There are also opportunities for interactive games and creations.</p>
+<ul>
+ <li>Chatbot</li>
+ <li>AI Guided or Random images</li>
+ <li>Lists: Shopping, To-Do, Goals</li>
+ <li>Stocks</li>
+</ul>
 <p>Parts List:</p>
 <ul>
 <li>LED Panel</li>
