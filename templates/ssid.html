@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block style %}
+        <style>
+                ul#ssid li span {
+                        cursor: pointer;
+                        color: red;
+                }
+        </style>
+{% endblock %}
+
+{% block content %}
+	<section>
+		<h2>Set Wifi Password:</h2>
+		<form method="post" accept-charset="UTF-8">
+			<p>"Enter EXACT password. Setting the wrong password will require keyboard/video to repair."</p>
+			<p>"Use the BACK BUTTON ONLY to select a different WIFI network."</p>
+			<p><h2>"SSID: {{network}}"</h2></p>
+			<p><input type="password" name="password"/></p>
+			<p><input type="submit" value="Set Password"/></p>
+		</form>
+	</section>
+	<hr />
+
+{% endblock %}

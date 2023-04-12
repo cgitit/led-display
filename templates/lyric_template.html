@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block style %}
+        <style>
+                ul#lyric_template li span {
+                        cursor: pointer;
+                        color: red;
+                }
+        </style>
+{% endblock %}
+
+{% block content %}
+	<section>
+		<h2>{{lyricTitle}}</h2>
+		<form method="get">
+			<p>{{lyricText}}</p>
+		</form>
+	</section>
+	<hr />
+
+{% endblock %}

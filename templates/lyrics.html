@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block style %}
+	<style>
+		ul#lyrics li span {
+			cursor: pointer;
+			color: red;
+		}
+	</style>
+{% endblock %}
+
+{% block content %}
+	<section>
+		<h2>Add Lyrics:</h2>
+		<form method="post">
+			<p>Artist:</p>
+			<p><input type="text" name="lyricArtist" /></p>
+			<p>Song Title:</p>
+			<p><input type="text" name="lyricTitle" /></p>
+			<p>Song Text:</p>
+			<p><input type="text" name="lyricText" /></p>
+			<p><input type="submit" value="Submit Lyrics" /></p>
+		</form>
+	</section>
+	<hr />
+	<section>
+		<h2>Lyrics:</h2>
+		<ul id="lyrics">
+			{% for lyric in lyrics %}
+				<li>
+					<a href="/lyrics/dsp/{{lyric}}">{{ lyric|safe }}</a>
+					(<span data-lyric-index="{{ loop.index }}">DELETE</span>)
+				</li>
+			{% endfor %}
+		</ul>
+	</section>
+{% endblock %}
+
+{% block javascript %}
+	<script>
+			// we select the list itself rather than the items
+			// this adds a single listener
+			// we'll use target.closest to get the span clicked
+			// to get the quote index we use the span's dataset
+			// we also hack the quote itself from the html
+			// and use it in the confirmation
+			// fetch POSTs to /quotes/{line}
+			// it also passes line in the body which we are
+			// not using lol
+		const onLoad = () => {
+			document.querySelector("ul#lyrics").addEventListener("click", (event) => {
+				const span = event.target.closest("span");
+				const lyric = span.dataset.lyricIndex;
+				//const quote = span.parentElement.innerHTML.replace(/[\r\n\t]/g, "").split("(<span")[0];
+				if (window.confirm(`Are you sure you want to delete?\n\n${lyric}`)) {
+					fetch(`/lyrics/del/${lyric}`, {
+						method: "POST",
+						body: JSON.stringify({lyric}),
+					}).then((response) => {
+						span.parentElement.remove();
+						//window.location.reload();
+					});
+				}
+			});
+
+		}
+		window.onload = onLoad;
+	</script>
+{% endblock %}

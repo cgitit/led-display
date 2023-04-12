@@ -1,0 +1,32 @@
+
+{% extends "base.html" %}
+{% block content %}
+	{% if name %}
+		<h1>Hello {{ name }}!</h1>
+	{% else %}
+		<h1>Hello, Welcome to your LED SIGN!</h1>
+		<h2>This is the main control page.</h2>
+		<button onclick="ledStart()">This button does nothing much.</button>
+		<ul>
+			<li>Functions:</li>
+			<li>Prices: BTC LTC ETH</li>
+			<li>Plays(small): gif avi</li> 
+			<li>Images: jpg png bmp</li>
+			<li>Time Clock</li>
+			<li>Atonomous randomness: Game of life</li>
+			<li>Song Lyrics</li>
+			<li>Personalized Quotes</li>
+			<li>Zoom: r/place</li>
+			<li>Possible: Chatbot, Games, AI image sources, News, Shopping List, Goals, Stocks, etc</li>
+		</ul>
+		
+		<script>
+		function ledStart() {
+			var colors = ["white","gray","blue", "orange", "red"];
+			var randomColor = colors[Math.floor(Math.random() * colors.length)];
+			document.body.style.backgroundColor = randomColor;
+		}
+		</script>
+
+	{% endif %}
+{% endblock %}

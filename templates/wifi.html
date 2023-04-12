@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+	<section>
+		<h2>Wifi networks:</h2>
+		<ul>
+		{% for network in networks %}
+			<li><a href='ssid/{{network|safe}}' id=network>{{ network|safe }}</a></li>
+		{% endfor %}
+		</ul>
+	</section>
+{% endblock %}

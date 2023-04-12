@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block style %}
+	<style>
+		ul#images li span {
+			cursor: pointer;
+			color: red;
+		}
+	</style>
+{% endblock %}
+
+{% block content %}
+	<section>
+		<h2>Add Image:</h2>
+		<form method="POST" enctype="multipart/form-data">
+			<p><input type="file" accept="image/*" name="userImage" /></p>
+			<p><input type="submit" value="Add Image" /></p>
+		</form>
+	</section>
+	<hr />
+	<section>
+		<h2>Images:</h2>
+		<ul id="images">
+			{% for image in images %}
+				<li>
+					<img id="{{image|safe}}" src="static/images/{{image|safe}}" alt="None">
+					(<span data-image-index="{{ loop.index }}">DELETE</span>)
+				</li>
+			{% endfor %}
+		</ul>
+	</section>
+{% endblock %}
+
+{% block javascript %}
+	<script>
+		const onLoad = () => {
+			// we select the list itself rather than the items
+			// this adds a single listener
+			// we'll use target.closest to get the span clicked
+			// to get the image index we use the span's dataset
+			// we also hack the image itself from the html
+			// and use it in the confirmation
+			// fetch POSTs to /images/del/{image}
+			// it also passes image in the body which we are
+			// not using lol
+			document.querySelector("ul#images").addEventListener("click", (event) => {
+				const span = event.target.closest("span");
+				const image = span.dataset.imageIndex;
+				//const image = span.parentElement.innerHTML.replace(/[\r\n\t]/g, "").split("(<span")[0];
+				if (window.confirm(`Are you sure you want to delete the following image: ${image}`)) {
+					fetch(`/images/del/${image}`, {
+						method: "POST",
+						body: JSON.stringify({image}),
+					}).then((response) => {
+						span.parentElement.remove();
+						//window.location.reload();
+					});
+				}
+			});
+
+		}
+		window.onload = onLoad;
+	</script>
+{% endblock %}
