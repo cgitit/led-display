@@ -1,5 +1,6 @@
 # led-display
-
+<h2>This repo is a work in progress.</h2>
+<h2>Changes are needed to bring it up to repo standards. See Issues.</h2>
 <p>This is python script to control a single 32x64 LED display</p>
 <p>The original plan was an art project for a friend to scroll some favorite quotes.<p>
 <p>Currently there are many more functions added to the display:</p>
